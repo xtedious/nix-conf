@@ -3,18 +3,14 @@
   pkgs,
   config,
   lib,
-  inputs,
   unstable,
   ...
-}:
-let
+}: let
   cfg = config.hyprland-module;
-in
-  {
+in {
   options.hyprland-module.enable = lib.mkEnableOption "Enable Hyprland and related packages";
 
   config = lib.mkIf cfg.enable {
-
     nixpkgs.config.allowUnfree = true;
 
     # System packages related to hyprland
@@ -40,7 +36,7 @@ in
       networkmanagerapplet # Network Manager
       rofi-wayland
 
-      # System packages to be replaced to wayland 
+      # System packages to be replaced to wayland
     ];
 
     programs = {
@@ -50,6 +46,5 @@ in
 
     # For Electron apps to use wayland
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
   };
 }

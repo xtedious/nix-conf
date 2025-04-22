@@ -231,13 +231,13 @@
       "locked": {
         "lastModified": 1744973347,
         "narHash": "sha256-nG+ucj87HPDBRdPq7qeW8sTaG7jnQUzpsOpJyZNdIC4=",
-        "owner": "NotAShelf",
+        "owner": "notashelf",
         "repo": "nvf",
         "rev": "92812036cce52687a9e089858d79f0e96c43c64c",
         "type": "github"
       },
       "original": {
-        "owner": "NotAShelf",
+        "owner": "notashelf",
         "repo": "nvf",
         "type": "github"
       }

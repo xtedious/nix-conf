@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   lib,
   ...
@@ -47,13 +48,16 @@
       tabstop = 2;
     };
 
-    useSystemClipboard = true;
-
-    additionalRuntimePaths = [
-      ./nvim
+    keymaps = [
+      {
+        key = "<C-n>";
+        mode = ["n"];
+        action = ":Neotree toggle<CR>";
+        silent = true;
+        desc = "Toggle neotree";
+      }
     ];
 
-    luaConfigRC.myconfig = ''
-    '';
+    useSystemClipboard = true;
   };
 }

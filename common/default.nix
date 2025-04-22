@@ -1,4 +1,4 @@
- # Machine Configuration
+# Machine Configuration
 {
   config,
   pkgs,
@@ -8,128 +8,143 @@
   lib,
   inputs,
   system,
+  unstable,
   ...
 }: {
   imports = [
     ../user.nix
   ];
 
-   environment.systemPackages = with pkgs; [
-     # dev tools
-     gnumake
-     libgcc
-     clang
-     lldb # llvm debugger
-     vim
-     neovim
-     wget
-     git
-     killall
-     # Audio
-     alsa-utils
-     pavucontrol
-     pamixer
-     brightnessctl
-     mpc # Music
-     kitty # Terminal
-     fastfetch # fetcher
-     btop
-     # Networking
-     dunst
-     libnotify
-     nmap # network discovery
-     # Archiving
-     unzip
-     xarchiver
-     # Graphics
-     mesa
-     gpu-viewer
-     vulkan-tools
-     virtualglLib
-   ];
+  environment.systemPackages = with pkgs; [
+    # dev tools
+    gnumake
+    libgcc
+    clang
+    lldb # llvm debugger
+    vim
+    wget
+    git
+    killall
+    # Audio
+    alsa-utils
+    pavucontrol
+    pamixer
+    brightnessctl
+    mpc # Music
+    kitty # Terminal
+    fastfetch # fetcher
+    btop
+    # Networking
+    dunst
+    polkit
+    polkit_gnome
+    libnotify
+    nmap # network discovery
+    # Archiving
+    unzip
+    xarchiver
+    # Graphics
+    mesa
+    gpu-viewer
+    vulkan-tools
+    virtualglLib
+    # CA certificates
+    cacert
+  ];
 
-   # Default programs
-   programs = {
-     git.enable = true;
-     dconf.enable = true;
+  # Default programs
+  programs = {
+    git.enable = true;
+    dconf.enable = true;
 
-     # File Manager
-     thunar.enable = true;
+    # Text Editor
+    neovim = {
+      enable = true;
+    };
 
-     # SSH and GPG keys
-     gnupg.agent = {
-       enable = true;
-       enableSSHSupport = true;
-     };
-   };
+    # File Manager
+    thunar.enable = true;
 
-   # Default Services
-   services = {
-     # default display manager is xorg
-     xserver = {
-       enable = true;
-       displayManager.lightdm.enable = true;
-       xkb = {
-         layout = "us";
-         variant = "";
-       };
-     };
+    # SSH and GPG keys
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
 
-     # Thumbnails
-     tumbler.enable = true;
+    # File Sharing
+    localsend = {
+      enable = true;
+      openFirewall = true;
+    };
+  };
 
-     # Audio
-     pipewire = {
-       enable = true;
-       alsa.enable = true;
-       alsa.support32Bit = true;
-       pulse.enable = true;
-       wireplumber.enable = true;
-     };
+  # Default Services
+  services = {
+    # default display manager is xorg
+    xserver = {
+      enable = true;
+      displayManager.lightdm.enable = true;
+      xkb = {
+        layout = "us";
+        variant = "";
+      };
+    };
 
-     # Daemons
-     blueman.enable = true;
-     mpd.enable = true;
-     upower.enable = true;
+    # Thumbnails
+    tumbler.enable = true;
 
-     # Networking
-     gnome.gnome-keyring.enable = true;
-     avahi = {
-       enable = true;
-       nssmdns4 = true;
-       openFirewall = true;
-     };
-     syncthing = {
-       enable = true;
-       user = "${username}";
-       dataDir = "/home/${username}";
-       configDir = "/home/${username}/.config/syncthing";
-     };
-   };
+    # Audio
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      wireplumber.enable = true;
+    };
 
-   # Fonts
-   fonts.packages = with pkgs; [
-     noto-fonts
-     noto-fonts-cjk-sans
-     font-awesome
-   ];
+    # Daemons
+    blueman.enable = true;
+    mpd.enable = true;
+    upower.enable = true;
 
-   # Set timezone
-   time.timeZone = "Africa/Johannesburg";
+    # Networking
+    gnome.gnome-keyring.enable = true;
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+    };
+    syncthing = {
+      enable = true;
+      user = "${username}";
+      dataDir = "/home/${username}";
+      configDir = "/home/${username}/.config/syncthing";
+    };
+  };
 
-   # Bluetooth
-   hardware = {
-     bluetooth = {
-       enable = true;
-       powerOnBoot = true;
-       settings = {
-         General.Enable = "Source,Sink,Media,Socket";
-         General.Experimental = true;
-       };
-     };
-   };
+  # Fonts
+  fonts.packages = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk-sans
+    font-awesome
+  ];
 
-   # Security/Polkit
+  # Set timezone
+  time.timeZone = "Africa/Johannesburg";
+
+  # Bluetooth
+  hardware = {
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+      settings = {
+        General.Enable = "Source,Sink,Media,Socket";
+        General.Experimental = true;
+      };
+    };
+  };
+
+  # Security/Polkit
   security.rtkit.enable = true;
   security.polkit.enable = true;
   security.polkit.extraConfig = ''
@@ -157,7 +172,7 @@
   networking = {
     networkmanager.enable = true;
     hostName = "${host}";
-    timeServers = options.networking.timeServer.default ++ ["pool.ntp.org"];
+    timeServers = options.networking.timeServers.default ++ ["pool.ntp.org"];
   };
   # Open ports in the firewall
   networking.firewall.allowedTCPPorts = [4455 22];
@@ -166,4 +181,4 @@
   # networking.firewall.enable = false;
 
   # The End
- }
+}

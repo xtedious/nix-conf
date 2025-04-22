@@ -30,8 +30,7 @@
     nvf,
     alejandra,
     ...
-}:
-  let 
+  }: let
     system = "x86_64-linux";
     host = "nixos";
     username = "xtedious";
@@ -45,13 +44,13 @@
     };
   in {
     # Neovim NVF
-     packages."x86_64-linux".nvf-neovim =
-       (nvf.lib.neovimConfiguration {
-         pkgs = nixpkgs.legacyPackages."x86_64-linux";
-         modules = [./modules/apps/nvf-neovim.nix];
-       })
-       .neovim;
-    
+    packages."x86_64-linux".nvf-neovim =
+      (nvf.lib.neovimConfiguration {
+        pkgs = nixpkgs-unstable.legacyPackages."x86_64-linux";
+        modules = [./modules/apps/nvf-neovim.nix];
+      })
+      .neovim;
+
     nixosConfigurations = {
       "${host}" = nixpkgs.lib.nixosSystem {
         specialArgs = {
@@ -62,13 +61,14 @@
           unstable = unstable-pkgs;
         };
         modules = [
-           {
-             environment.systemPackages = [
-               alejandra.defaultPackage.${system}
-               self.packages.${pkgs.stdenv.system}.nvf-neovim
-             ];
-           }
-           nvf.nixosModules.default
+          {
+            # Neovim and alejandra setups
+            environment.systemPackages = [
+              alejandra.defaultPackage.${system}
+              self.packages.${pkgs.stdenv.system}.nvf-neovim
+            ];
+          }
+          nvf.nixosModules.default
           ./common/config.nix
         ];
       };

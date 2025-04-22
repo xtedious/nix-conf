@@ -8,12 +8,19 @@
   imports = [
     ./modules/nix-modules.nix
   ];
-  
+
   # Enabled Modules
-  hyprland-module.enable = true;
+  xmonad-module.enable = true; # WM
+
+  # Apps
+  steam-module.enable = true;
+  virt-manager-module.enable = true;
+
+  # Dev Modules
+  rpi-pico-module.enable = true;
 
   # xtedious
-  users  = {
+  users = {
     mutableUsers = true;
     users."${username}" = {
       homeMode = "755";
@@ -26,13 +33,14 @@
         unstable.arduino-ide
         # 3D printing
         unstable.orca-slicer
-        freecad-wayland
+        unstable.freecad
         # Audio
         mpv
         # Work
         discord
         librewolf
         obs-studio
+        unstable.gimp3
         qbittorrent
         unstable.obsidian
         anki
@@ -47,10 +55,12 @@
         wineWowPackages.stable
         # Games
         lutris
+        unstable.retroarch
         cava # Music Visualizer
         # IoT development
         unstable.platformio
         unstable.rpi-imager
+        unstable.realvnc-vnc-viewer
         # Haskell
         ghc
         haskell-language-server
@@ -60,8 +70,8 @@
     defaultUserShell = pkgs.zsh;
   };
 
-  environment.shells = with pkgs; [ zsh ];
-  environment.systemPackages = with pkgs; [ lsd fzf ]; 
+  environment.shells = with pkgs; [zsh];
+  environment.systemPackages = with pkgs; [lsd fzf];
 
   programs = {
     # Zsh configuration
@@ -71,14 +81,11 @@
       ohMyZsh = {
         enable = true;
         plugins = ["git"];
-        theme = "agnoster"; 
+        theme = "agnoster";
       };
 
       autosuggestions.enable = true;
       syntaxHighlighting.enable = true;
     };
-
-    neovim.enable = true;
   };
 }
-
