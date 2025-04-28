@@ -25,6 +25,7 @@
     wget
     git
     killall
+    gnome-disk-utility
     # Audio
     alsa-utils
     pavucontrol
@@ -48,8 +49,6 @@
     gpu-viewer
     vulkan-tools
     virtualglLib
-    # CA certificates
-    cacert
   ];
 
   # Default programs
@@ -125,6 +124,9 @@
   # Fonts
   fonts.packages = with pkgs; [
     noto-fonts
+    fira-code
+    jetbrains-mono
+    font-awesome
     noto-fonts-cjk-sans
     font-awesome
   ];

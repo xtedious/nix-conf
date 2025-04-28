@@ -34,6 +34,7 @@ in {
       xscreensaver
       # Dock
       unstable.eww
+      xmobar
       xdotool
       # Clipboard
       xclip

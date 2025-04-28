@@ -55,6 +55,7 @@
         wineWowPackages.stable
         # Games
         lutris
+        unstable.bluez
         unstable.retroarch
         cava # Music Visualizer
         # IoT development
