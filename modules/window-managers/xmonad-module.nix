@@ -26,19 +26,22 @@ in {
 
     # System packages related to xmonad
     environment.systemPackages = with pkgs; [
+      unstable.xmonad-log # Dbus
       unstable.rofi
       scrot # Screenshots
-      feh
       trayer
       xfce.xfce4-power-manager
       xscreensaver
-      # Dock
-      unstable.eww
+      # Status Bar
+      polybar
       xmobar
       xdotool
       # Clipboard
       xclip
       unstable.picom-pijulius # Compositer
+      # Theming
+      feh
+      unstable.pywal16
     ];
   };
 }

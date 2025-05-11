@@ -59,6 +59,8 @@
     gvfs.enable = true;
     udev.enable = true;
     envfs.enable = true;
+
+    # Enable dbus
     dbus.enable = true;
 
     # NFS

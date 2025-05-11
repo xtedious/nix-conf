@@ -84,8 +84,9 @@
       enable = true;
       displayManager.lightdm.enable = true;
       xkb = {
-        layout = "us";
+        layout = "us,jp";
         variant = "";
+        options = "grp:alt_shift_toggle";
       };
     };
 

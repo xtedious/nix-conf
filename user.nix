@@ -30,10 +30,9 @@
       packages = with pkgs; [
         # Dev Stuff
         ikos
-        unstable.arduino-ide
         # 3D printing
         unstable.orca-slicer
-        unstable.freecad
+        unstable.freecad-wayland
         # Audio
         mpv
         # Work
@@ -41,12 +40,10 @@
         librewolf
         obs-studio
         unstable.gimp3
-        qbittorrent
         unstable.obsidian
         anki
-        unstable.libreoffice
         krita
-        blender
+        unstable.kdePackages.kdenlive
         # Password Manager
         unstable.keepassxc
         # Screenshots utility
@@ -56,7 +53,6 @@
         # Games
         lutris
         unstable.bluez
-        unstable.retroarch
         cava # Music Visualizer
         # IoT development
         unstable.platformio
@@ -65,6 +61,10 @@
         # Haskell
         ghc
         haskell-language-server
+        # test
+        unstable.chatterino7
+        betterlockscreen
+        woeusb
       ];
     };
 
